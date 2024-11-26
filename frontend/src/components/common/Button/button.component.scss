@@ -1,0 +1,28 @@
+@use 'colors';
+
+.button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &--primary {
+    background-color: colors.$primary;
+    color: colors.$white;
+
+    &:hover {
+      background-color: colors.$primary-opaque;
+    }
+  }
+
+  &--secondary {
+    background-color: colors.$secondary;
+    color: colors.$white;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+} 
