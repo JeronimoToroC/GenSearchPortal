@@ -1,0 +1,73 @@
+@use 'colors';
+@use 'spaces';
+@use 'font-sizes';
+
+.login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: colors.$white;
+
+    &__container {
+        width: 100%;
+        max-width: 400px;
+        padding: spaces.$space-32;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    &__title {
+        text-align: center;
+        margin-bottom: spaces.$space-32;
+        color: colors.$primary;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: spaces.$space-24;
+    }
+
+    &__form-group {
+        display: flex;
+        flex-direction: column;
+        gap: spaces.$space-8;
+
+        label {
+            font-size: font-sizes.$font-14;
+            color: colors.$gray;
+        }
+
+        input {
+            padding: spaces.$space-8 spaces.$space-16;
+            border: 1px solid colors.$gray;
+            border-radius: 6px;
+            font-size: font-sizes.$font-14;
+            outline: none;
+            transition: all 0.2s ease;
+
+            &:focus {
+                border-color: colors.$primary;
+            }
+        }
+    }
+
+    &__signup {
+        margin-top: spaces.$space-24;
+        text-align: center;
+        font-size: font-sizes.$font-14;
+        color: colors.$gray;
+
+        a {
+            color: colors.$primary;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 500;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
