@@ -1,6 +1,6 @@
-@import './font-sizes.scss';
-@import './spaces.scss';
-@import './colors.scss';
+@use './font-sizes.scss';
+@use './spaces.scss';
+@use './colors.scss';
 
 * {
 	font-family: 'Roboto', sans-serif;
@@ -10,17 +10,17 @@
 }
 
 .title1 {
-	font-size: $font-24;
+	font-size: font-sizes.$font-24;
 }
 
 .title2 {
-	font-size: $font-20;
+	font-size: font-sizes.$font-20;
 }
 
 .title3 {
-	font-size: $font-18;
+	font-size: font-sizes.$font-18;
 }
 
 .title4 {
-	font-size: $font-16;
+	font-size: font-sizes.$font-16;
 }
