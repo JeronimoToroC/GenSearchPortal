@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FormErrorComponent } from '@common-components/FormError/form-error.component'
 import { ButtonComponent } from '@common-components/Button/button.component'
 import { RequestService } from '@services/request/request.service'
+import { UserGlobalState } from '@globalStates/user.globalstate'
 import { Component, inject } from '@angular/core'
 import { UserLoginDto } from '@dtos/user.dtos'
 import { UserModel } from '@models/user.model'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-login',
@@ -16,7 +18,9 @@ import { UserModel } from '@models/user.model'
 })
 export class LoginComponent {
     private readonly fb = inject(FormBuilder)
+    private readonly router = inject(Router)
     private readonly requestService = inject(RequestService)
+    private readonly userGlobalState = inject(UserGlobalState)
 
     loginForm: FormGroup = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -34,7 +38,8 @@ export class LoginComponent {
             const response = await this.requestService.post<UserModel>('/login', loginDto)
 
             if (response) {
-                console.log('Usuario logueado:', response)
+                this.userGlobalState.setUser(response)
+                await this.router.navigate(['/home'])
             } else {
                 alert('Error al iniciar sesión')
             }

@@ -1,3 +1,4 @@
+import { StorageService } from '@services/storage/storage.service'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { UserModel } from '@models/user.model'
 import { Injectable } from '@angular/core'
@@ -6,18 +7,27 @@ import { Injectable } from '@angular/core'
     providedIn: 'root',
 })
 export class UserGlobalState {
-    private readonly userSubject: BehaviorSubject<UserModel | null> = new BehaviorSubject<UserModel | null>(null)
+    private readonly USER_STORAGE_KEY = 'user'
+    private readonly userSubject: BehaviorSubject<UserModel | null>
 
-    // Observable público para que los componentes puedan suscribirse
-    public user$: Observable<UserModel | null> = this.userSubject.asObservable()
+    public user$: Observable<UserModel | null>
 
-    // Getter para obtener el valor actual del usuario
+    constructor(private readonly storageService: StorageService) {
+        const storedUser = this.storageService.getItem<UserModel>(this.USER_STORAGE_KEY)
+        this.userSubject = new BehaviorSubject<UserModel | null>(storedUser)
+        this.user$ = this.userSubject.asObservable()
+    }
+
     get currentUser(): UserModel | null {
         return this.userSubject.getValue()
     }
 
-    // Setter para actualizar el usuario
     setUser(user: UserModel | null): void {
+        if (user) {
+            this.storageService.setItem(this.USER_STORAGE_KEY, user)
+        } else {
+            this.storageService.removeItem(this.USER_STORAGE_KEY)
+        }
         this.userSubject.next(user)
     }
 }
