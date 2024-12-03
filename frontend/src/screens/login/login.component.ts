@@ -7,6 +7,7 @@ import { UserGlobalState } from '@globalStates/user.globalstate'
 import { Component, inject } from '@angular/core'
 import { UserLoginDto } from '@dtos/user.dtos'
 import { UserModel } from '@models/user.model'
+import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
 
 @Component({
@@ -19,6 +20,7 @@ import { Router } from '@angular/router'
 export class LoginComponent {
     private readonly fb = inject(FormBuilder)
     private readonly router = inject(Router)
+    private readonly toastr = inject(ToastrService)
     private readonly requestService = inject(RequestService)
     private readonly userGlobalState = inject(UserGlobalState)
 
@@ -34,18 +36,18 @@ export class LoginComponent {
 
         try {
             const loginDto: UserLoginDto = this.loginForm.value
-
             const response = await this.requestService.post<UserModel>('/login', loginDto)
 
             if (response) {
                 this.userGlobalState.setUser(response)
                 await this.router.navigate(['/home'])
+                this.toastr.success('Sesión iniciada correctamente')
             } else {
-                alert('Error al iniciar sesión')
+                this.toastr.error('Credenciales inválidas')
             }
         } catch (error) {
             console.error('Error en el proceso de login:', error)
-            alert('Error al iniciar sesión')
+            this.toastr.error('Error al iniciar sesión')
         }
     }
 }
