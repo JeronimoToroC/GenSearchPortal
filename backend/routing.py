@@ -4,7 +4,6 @@ from fastapi import APIRouter
 
 app_router = APIRouter()
 
-# Obtener todos los usuarios
 @app_router.get("/", summary="Main route", tags=["Main"])
 def main():
     """Main route."""
