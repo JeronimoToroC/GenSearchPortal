@@ -35,3 +35,8 @@ htmlcov/
 # Archivos temporales
 *.tmp
 .DS_Store
+
+# Base de datos SQLite
+*.db
+*.sqlite
+*.sqlite3
