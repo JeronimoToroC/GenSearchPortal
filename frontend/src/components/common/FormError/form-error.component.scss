@@ -1,0 +1,10 @@
+@use 'colors';
+@use 'font-sizes';
+@use 'spaces';
+
+.error-message {
+    color: colors.$red;
+    font-size: font-sizes.$font-12;
+    margin-top: spaces.$space-4;
+    display: block;
+} 

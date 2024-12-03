@@ -1,16 +1,16 @@
 import { LinkToCreateAccountComponent } from '@specific-components/login/link-to-create-account/link-to-create-account.component'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FormErrorComponent } from '@common-components/FormError/form-error.component'
 import { ButtonComponent } from '@common-components/Button/button.component'
 import { RequestService } from '@services/request/request.service'
 import { Component, inject } from '@angular/core'
 import { UserLoginDto } from '@dtos/user.dtos'
 import { UserModel } from '@models/user.model'
-import { NgIf } from '@angular/common'
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ReactiveFormsModule, ButtonComponent, LinkToCreateAccountComponent, NgIf],
+    imports: [ReactiveFormsModule, ButtonComponent, LinkToCreateAccountComponent, FormErrorComponent],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
 })
