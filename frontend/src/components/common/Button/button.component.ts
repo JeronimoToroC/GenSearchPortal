@@ -11,4 +11,5 @@ type ButtonStyle = 'primary' | 'secondary'
 export class ButtonComponent {
     @Input() title: string = ''
     @Input() style: ButtonStyle = 'primary'
+    @Input() disabled: boolean = false
 }
