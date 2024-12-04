@@ -1,0 +1,36 @@
+<main class="register">
+    <div class="register__container">
+        <h1 class="title1 register__title">Crear cuenta</h1>
+        <form class="register__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="register__form-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" formControlName="name" placeholder="Tu nombre" />
+                <app-form-error [control]="registerForm.get('name')"></app-form-error>
+            </div>
+            <div class="register__form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" formControlName="email" placeholder="ejemplo@correo.com" />
+                <app-form-error [control]="registerForm.get('email')"></app-form-error>
+            </div>
+            <div class="register__form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" formControlName="password" placeholder="••••••••" />
+                <app-form-error [control]="registerForm.get('password')"></app-form-error>
+            </div>
+            <app-button
+                [title]="'Crear cuenta'"
+                [style]="'primary'"
+                [type]="'submit'"
+                [disabled]="registerForm.invalid"
+            ></app-button>
+        </form>
+        <app-link-to-login></app-link-to-login>
+    </div>
+
+    <app-verification-modal
+        [isVisible]="isModalVisible"
+        [email]="userEmail"
+        (close)="handleCloseModal()"
+        (verify)="handleVerifyCode($event)"
+    ></app-verification-modal>
+</main>

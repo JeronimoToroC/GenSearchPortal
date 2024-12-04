@@ -1,0 +1,21 @@
+@use 'colors';
+@use 'spaces';
+@use 'font-sizes';
+
+.link-to-login {
+    margin-top: spaces.$space-24;
+    text-align: center;
+    font-size: font-sizes.$font-14;
+    color: colors.$gray;
+
+    a {
+        color: colors.$primary;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

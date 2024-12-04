@@ -1,7 +1,11 @@
 @use 'colors';
 @use 'spaces';
+@use 'font-sizes';
 
 .home {
+    app-logout-button {
+        margin-top: spaces.$space-24;
+    }
     background-color: colors.$white;
     padding: spaces.$space-32;
     flex-direction: column;
@@ -40,7 +44,8 @@
     border-collapse: collapse;
     margin-bottom: spaces.$space-24;
 
-    th, td {
+    th,
+    td {
         border: 1px solid colors.$gray;
         padding: spaces.$space-8 spaces.$space-16;
         text-align: left;

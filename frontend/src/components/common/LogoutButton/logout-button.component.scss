@@ -1,0 +1,18 @@
+@use 'colors';
+@use 'spaces';
+@use 'font-sizes';
+
+.logout-button {
+    padding: spaces.$space-8 spaces.$space-16;
+    background-color: colors.$primary;
+    color: colors.$white;
+    border: none;
+    border-radius: 6px;
+    font-size: font-sizes.$font-14;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: colors.$primary-opaque;
+    }
+}

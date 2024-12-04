@@ -5,6 +5,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from routing import app_router
 from database import engine
 import models
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL_FROM = os.getenv("EMAIL_FROM")
+
 
 app = FastAPI()
 
@@ -30,3 +42,4 @@ if __name__ == "__main__":
 
     models.Base.metadata.create_all(bind=engine)
     uvicorn.run(app, host="0.0.0.0", port=8001)
+    

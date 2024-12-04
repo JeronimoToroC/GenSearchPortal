@@ -6,11 +6,12 @@ type ButtonStyle = 'primary' | 'secondary'
     selector: 'app-button',
     standalone: true,
     templateUrl: './button.component.html',
-    styleUrl: './button.component.scss',
+    styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
     @Input() title: string = ''
     @Input() style: ButtonStyle = 'primary'
+    @Input() type: 'button' | 'submit' = 'button'
     @Input() disabled: boolean = false
     @Input() height: string = 'auto'
     @Input() width: string = 'auto'

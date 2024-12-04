@@ -2,13 +2,14 @@ import { ButtonComponent } from '@common-components/Button/button.component'
 import { CommonModule } from '@angular/common'
 import { GenModel } from '@models/gen.model'
 import { Component } from '@angular/core'
+import { LogoutButtonComponent } from '@common-components/LogoutButton/logout-button.component'
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ButtonComponent, CommonModule],
+    imports: [ButtonComponent, CommonModule, LogoutButtonComponent],
     templateUrl: './home.component.html',
-    styleUrl: './home.component.scss',
+    styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
     genes: GenModel[] = []
