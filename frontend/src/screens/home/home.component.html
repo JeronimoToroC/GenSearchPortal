@@ -1,5 +1,7 @@
 <main class="home">
     <h1 class="title1 home__title">Búsqueda de genes 🧬</h1>
+
+    <!-- Input search -->
     <section class="home__search">
         <input type="text" class="home__search-input" placeholder="Ej: BRCA1" />
         <app-button
@@ -9,5 +11,64 @@
             [style]="'secondary'"
             [fontSize]="'16px'"
         ></app-button>
+    </section>
+
+    <!-- Results -->
+    <section class="home__results">
+        <table class="genes-table">
+            <thead>
+                <tr>
+                    <th>Cromosoma</th>
+                    <th>Posición</th>
+                    <th>ID</th>
+                    <th>Ref</th>
+                    <th>Alt</th>
+                    <th>Qual</th>
+                    <th>Filtro</th>
+                    <th>Info</th>
+                    <th>Formato</th>
+                    <th>Salida 1</th>
+                    <th>Salida 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gen of paginatedGenes">
+                    <td>{{ gen.Chrom }}</td>
+                    <td>{{ gen.Pos }}</td>
+                    <td>{{ gen.Id }}</td>
+                    <td>{{ gen.Ref }}</td>
+                    <td>{{ gen.Alt }}</td>
+                    <td>{{ gen.Qual }}</td>
+                    <td>{{ gen.Filter }}</td>
+                    <td>{{ gen.Info }}</td>
+                    <td>{{ gen.Format }}</td>
+                    <td>{{ gen.Output1 }}</td>
+                    <td>{{ gen.Output2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <app-button
+                [title]="'Anterior'"
+                [style]="'secondary'"
+                [disabled]="currentPage === 1"
+                (click)="onPageChange(currentPage - 1)"
+                [height]="'40px'"
+                [width]="'100px'"
+            ></app-button>
+
+            <span class="pagination__info"> Página {{ currentPage }} de {{ totalPages }} </span>
+
+            <app-button
+                [title]="'Siguiente'"
+                [style]="'secondary'"
+                [disabled]="currentPage === totalPages"
+                (click)="onPageChange(currentPage + 1)"
+                [height]="'40px'"
+                [width]="'100px'"
+            ></app-button>
+        </div>
     </section>
 </main>
