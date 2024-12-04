@@ -1,10 +1,16 @@
 @use 'colors';
 @use 'spaces';
+@use 'font-sizes';
 
 .home {
-    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
     background-color: colors.$white;
+
+    app-logout-button {
+        margin-top: spaces.$space-24;
+    }
 }

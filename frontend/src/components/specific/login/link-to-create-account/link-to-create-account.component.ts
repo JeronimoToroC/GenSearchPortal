@@ -1,14 +1,16 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-link-to-create-account',
     standalone: true,
     templateUrl: './link-to-create-account.component.html',
-    styleUrl: './link-to-create-account.component.scss',
+    styleUrls: ['./link-to-create-account.component.scss'],
 })
 export class LinkToCreateAccountComponent {
+    constructor(private readonly router: Router) {}
+
     onSignUp(): void {
-        // TODO: Implementar redirección a registro
-        console.log('Redirigiendo a registro...')
+        this.router.navigate(['/register'])
     }
 }

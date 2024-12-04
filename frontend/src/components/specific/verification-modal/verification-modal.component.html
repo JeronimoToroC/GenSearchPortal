@@ -1,0 +1,20 @@
+<div class="verification-modal" *ngIf="isVisible">
+    <div class="verification-modal__container">
+        <h2 class="verification-modal__title">Verifica tu correo</h2>
+        <p class="verification-modal__description">
+            Hemos enviado un código de 6 dígitos a <strong>{{ email }}</strong
+            >. Introduce el código para verificar tu cuenta.
+        </p>
+        <input
+            type="text"
+            maxlength="6"
+            [(ngModel)]="verificationCode"
+            class="verification-modal__input"
+            placeholder="Código de verificación"
+        />
+        <div class="verification-modal__actions">
+            <button class="button button--primary" (click)="verifyCode()">Verificar</button>
+            <button class="button button--secondary" (click)="closeModal()">Cancelar</button>
+        </div>
+    </div>
+</div>

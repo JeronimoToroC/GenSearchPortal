@@ -1,0 +1,87 @@
+@use 'colors';
+@use 'spaces';
+@use 'font-sizes';
+
+.verification-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &__container {
+        width: 100%;
+        max-width: 400px;
+        background-color: colors.$white;
+        padding: spaces.$space-32;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    &__title {
+        font-size: font-sizes.$font-20;
+        margin-bottom: spaces.$space-16;
+        color: colors.$primary;
+    }
+
+    &__description {
+        font-size: font-sizes.$font-14;
+        color: colors.$gray;
+        margin-bottom: spaces.$space-24;
+    }
+
+    &__input {
+        width: 100%;
+        padding: spaces.$space-8 spaces.$space-16;
+        border: 1px solid colors.$gray;
+        border-radius: 6px;
+        font-size: font-sizes.$font-14;
+        outline: none;
+        margin-bottom: spaces.$space-24;
+        transition: all 0.2s ease;
+
+        &:focus {
+            border-color: colors.$primary;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        gap: spaces.$space-16;
+
+        button {
+            width: 48%;
+            padding: spaces.$space-8;
+            font-size: font-sizes.$font-14;
+            border-radius: 6px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+
+            &--primary {
+                background-color: colors.$primary;
+                color: colors.$white;
+
+                &:hover {
+                    background-color: colors.$primary-opaque;
+                }
+            }
+
+            &--secondary {
+                background-color: colors.$gray;
+                color: colors.$white;
+
+                &:hover {
+                    background-color: darken(colors.$gray, 10%);
+                }
+            }
+        }
+    }
+}

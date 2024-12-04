@@ -1,0 +1,150 @@
+gensearchportal
++---backend
+|       .env
+|       .gitignore
+|       app.db
+|       database.py
+|       estructura.txt
+|       main.py
+|       models.py
+|       requirements.txt
+|       routing.py
+|
+|   +---dtos
+|   |       user_dto.py
+|   |
+|   |   +---__pycache__
+|   |           user_dto.cpython-312.pyc
+|   |
+|   +---logic
+|   |       user_logic.py
+|   |
+|   |   +---__pycache__
+|   |           user_logic.cpython-312.pyc
+|   |
+|   +---utils
+|   |       email_utils.py
+|   |
+|   |   +---__pycache__
+|   |           email_utils.cpython-312.pyc
+|   |
+|   +---__pycache__
+|           database.cpython-312.pyc
+|           main.cpython-312.pyc
+|           models.cpython-312.pyc
+|           routing.cpython-312.pyc
+|
++---frontend
+|       .editorconfig
+|       .gitignore
+|       .prettierrc
+|       angular.json
+|       estructura.txt
+|       package-lock.json
+|       package.json
+|       README.md
+|       tsconfig.app.json
+|       tsconfig.json
+|       tsconfig.spec.json
+|
+|   +---.angular
+|   +---.vscode
+|   +---node_modules
+|   +---public
+|   |       favicon.ico
+|   |
+|   +---src
+|       |   index.html
+|       |   main.ts
+|       |
+|       +---components
+|       |   +---common
+|       |   |   +---Button
+|       |   |           button.component.html
+|       |   |           button.component.scss
+|       |   |           button.component.ts
+|       |   |
+|       |   |   +---FormError
+|       |   |           form-error.component.html
+|       |   |           form-error.component.scss
+|       |   |           form-error.component.ts
+|       |   |
+|       |   |   +---LogoutButton
+|       |   |           logout-button.component.html
+|       |   |           logout-button.component.scss
+|       |   |           logout-button.component.ts
+|       |
+|       |   +---specific
+|       |       +---login
+|       |       |   +---link-to-create-account
+|       |       |           link-to-create-account.component.html
+|       |       |           link-to-create-account.component.scss
+|       |       |           link-to-create-account.component.ts
+|       |       |
+|       |       +---register
+|       |       |   +---link-to-login
+|       |       |           link-to-login.component.html
+|       |       |           link-to-login.component.scss
+|       |       |           link-to-login.component.ts
+|       |       |
+|       |       +---verification-modal
+|       |               verification-modal.component.html
+|       |               verification-modal.component.scss
+|       |               verification-modal.component.ts
+|       |
+|       +---config
+|       |       app.config.ts
+|       |
+|       +---dtos
+|       |       user.dtos.ts
+|       |
+|       +---environments
+|       |       environment.prod.ts
+|       |       environment.ts
+|       |
+|       +---globalStates
+|       |       user.globalstate.ts
+|       |
+|       +---guards
+|       |       auth.guard.ts
+|       |
+|       +---models
+|       |       user.model.ts
+|       |
+|       +---routes
+|       |       app.routes.ts
+|       |
+|       +---screens
+|       |   +---app
+|       |   |       app.component.html
+|       |   |       app.component.scss
+|       |   |       app.component.ts
+|       |   |
+|       |   +---home
+|       |   |       home.component.html
+|       |   |       home.component.scss
+|       |   |       home.component.ts
+|       |   |
+|       |   +---login
+|       |   |       login.component.html
+|       |   |       login.component.scss
+|       |   |       login.component.ts
+|       |   |
+|       |   +---register
+|       |           register.component.html
+|       |           register.component.scss
+|       |           register.component.ts
+|       |
+|       +---services
+|       |   +---request
+|       |   |       axios.service.ts
+|       |   |       request.service.ts
+|       |   |
+|       |   +---storage
+|       |           storage.service.ts
+|       |
+|       +---styles
+|               colors.scss
+|               font-sizes.scss
+|               spaces.scss
+|               styles.scss

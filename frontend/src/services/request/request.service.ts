@@ -1,30 +1,29 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http'
-import { environment } from '@environments/environment'
 import { Injectable } from '@angular/core'
-import { firstValueFrom } from 'rxjs'
+import { AxiosService } from './axios.service'
 
 @Injectable({
     providedIn: 'root',
 })
 export class RequestService {
-    private readonly baseUrl = environment.apiUrl
+    private readonly axiosService: AxiosService
 
-    constructor(private readonly http: HttpClient) {}
-
-    get<T>(endpoint: string, params?: HttpParams, headers?: HttpHeaders): Promise<T> {
-        const options = { params, headers }
-        return firstValueFrom(this.http.get<T>(`${this.baseUrl}${endpoint}`, options))
+    constructor() {
+        this.axiosService = new AxiosService()
     }
 
-    post<T>(endpoint: string, body: any, headers?: HttpHeaders): Promise<T> {
-        return firstValueFrom(this.http.post<T>(`${this.baseUrl}${endpoint}`, body, { headers }))
+    get<T>(endpoint: string, params?: any): Promise<T> {
+        return this.axiosService.get(endpoint, params)
     }
 
-    put<T>(endpoint: string, body: any, headers?: HttpHeaders): Promise<T> {
-        return firstValueFrom(this.http.put<T>(`${this.baseUrl}${endpoint}`, body, { headers }))
+    post<T>(endpoint: string, body: any): Promise<T> {
+        return this.axiosService.post(endpoint, body)
     }
 
-    delete<T>(endpoint: string, headers?: HttpHeaders): Promise<T> {
-        return firstValueFrom(this.http.delete<T>(`${this.baseUrl}${endpoint}`, { headers }))
+    put<T>(endpoint: string, body: any): Promise<T> {
+        return this.axiosService.put(endpoint, body)
+    }
+
+    delete<T>(endpoint: string): Promise<T> {
+        return this.axiosService.delete(endpoint)
     }
 }

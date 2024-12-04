@@ -42,12 +42,15 @@ export class LoginComponent {
                 this.userGlobalState.setUser(response)
                 await this.router.navigate(['/home'])
                 this.toastr.success('Sesión iniciada correctamente')
-            } else {
-                this.toastr.error('Credenciales inválidas')
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error en el proceso de login:', error)
-            this.toastr.error('Error al iniciar sesión')
+
+            if (error.response?.status === 401) {
+                this.toastr.error('Credenciales inválidas')
+            } else {
+                this.toastr.error('Error al iniciar sesión. Intenta nuevamente.')
+            }
         }
     }
 }
