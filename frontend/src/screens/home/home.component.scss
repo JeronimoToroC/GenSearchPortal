@@ -2,9 +2,30 @@
 @use 'spaces';
 
 .home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: colors.$white;
+    padding: spaces.$space-32;
+    flex-direction: column;
+    gap: spaces.$space-32;
+    align-items: center;
+    display: flex;
+
+    &__title {
+        color: colors.$secondary;
+        font-size: 24px;
+    }
+
+    &__search {
+        gap: spaces.$space-24;
+        align-items: center;
+        display: flex;
+
+        &-input {
+            border: 1px solid colors.$gray;
+            border-radius: spaces.$space-8;
+            padding: spaces.$space-16;
+            font-size: 16px;
+            outline: none;
+            width: 300px;
+        }
+    }
 }
