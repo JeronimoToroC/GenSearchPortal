@@ -12,4 +12,7 @@ export class ButtonComponent {
     @Input() title: string = ''
     @Input() style: ButtonStyle = 'primary'
     @Input() disabled: boolean = false
+    @Input() height: string = 'auto'
+    @Input() width: string = 'auto'
+    @Input() fontSize: string = '14px'
 }
