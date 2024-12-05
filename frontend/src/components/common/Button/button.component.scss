@@ -30,6 +30,11 @@
     background-color: colors.$gray-dark;
     color: colors.$white;
   }
+
+  &--primary-dark {
+    background-color: colors.$primary-dark;
+    color: colors.$white;
+  }
 }
 
 button[disabled] {
