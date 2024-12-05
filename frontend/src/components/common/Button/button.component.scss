@@ -25,6 +25,11 @@
       opacity: 0.9;
     }
   }
+
+  &--gray {
+    background-color: colors.$gray-dark;
+    color: colors.$white;
+  }
 }
 
 button[disabled] {

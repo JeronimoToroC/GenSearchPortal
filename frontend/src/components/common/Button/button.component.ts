@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 
-type ButtonStyle = 'primary' | 'secondary'
+type ButtonStyle = 'primary' | 'secondary' | 'gray'
 
 @Component({
     selector: 'app-button',
