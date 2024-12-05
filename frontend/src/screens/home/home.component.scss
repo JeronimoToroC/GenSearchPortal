@@ -3,19 +3,30 @@
 @use 'font-sizes';
 
 .home {
-    app-logout-button {
-        margin-top: spaces.$space-24;
-    }
     background-color: colors.$white;
-    padding: spaces.$space-32;
+    padding: spaces.$space-24;
     flex-direction: column;
     gap: spaces.$space-32;
     align-items: center;
     display: flex;
 
+    &__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
     &__title {
         color: colors.$secondary;
         font-size: 24px;
+        margin: 0;
+    }
+
+    app-logout-button {
+        position: absolute;
+        right: 0;
     }
 
     &__search {
