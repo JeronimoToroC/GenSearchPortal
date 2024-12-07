@@ -40,29 +40,4 @@ def verify_otp(otp_data: VerifyOtpDto, db: Session = Depends(get_db)):
 @app_router.post("/upload-vcf", summary="Subir archivo VCF", tags=["Genome"])
 async def upload_vcf(file: UploadFile = File(...)):
     """Endpoint para subir archivo VCF."""
-    try:
-        # Verificar extensión
-        if not file.filename.endswith('.vcf'):
-            return JSONResponse(
-                status_code=400,
-                content={"error": "El archivo debe tener extensión .vcf"}
-            )
-
-        # Ruta donde se guardará el archivo
-        file_path = DATA_DIR / file.filename
-
-        # Guardar archivo en chunks para manejar archivos grandes
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        return {
-            "mensaje": "Archivo subido exitosamente",
-            "nombre_archivo": file.filename,
-            "ruta": str(file_path)
-        }
-
-    except Exception as e:
-        return JSONResponse(
-            status_code=500,
-            content={"error": f"Error al subir archivo: {str(e)}"}
-        )
+    return await UserLogic.upload_vcf(file)
