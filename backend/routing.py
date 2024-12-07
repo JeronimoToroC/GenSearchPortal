@@ -9,6 +9,7 @@ from database import get_db
 from dtos.user_dto import UserLoginDto, UserRegisterDto, VerifyOtpDto
 from logic.user_logic import UserLogic
 from logic.vcf_logic import VcfLogic
+from utils.insert_data_utils import procesar_archivo_vcf
 
 app_router = APIRouter()
 
@@ -41,4 +42,6 @@ def verify_otp(otp_data: VerifyOtpDto, db: Session = Depends(get_db)):
 @app_router.post("/upload-vcf", summary="Subir archivo VCF", tags=["Genome"])
 async def upload_vcf(file: UploadFile = File(...)):
     """Endpoint para subir archivo VCF."""
-    return await VcfLogic.upload_vcf(file)
+    await VcfLogic.upload_vcf(file)
+    procesar_archivo_vcf()
+    return {"message": "Archivo VCF subido exitosamente"}

@@ -5,7 +5,12 @@ from pathlib import Path
 
 def crear_base_datos():
     """Crear la base de datos e índices."""
-    db_path = "cabernetSauvignon.db"
+    # Asegurar que el directorio data existe
+    data_dir = Path("data")
+    data_dir.mkdir(exist_ok=True)
+    
+    # Crear la base de datos en el directorio data
+    db_path = data_dir / "cabernetSauvignon.db"
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
