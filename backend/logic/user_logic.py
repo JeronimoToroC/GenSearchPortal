@@ -2,9 +2,6 @@
 
 import random
 from werkzeug.security import check_password_hash
-from pathlib import Path
-import shutil
-from fastapi import UploadFile
 import string
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
