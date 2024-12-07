@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from dtos.user_dto import UserLoginDto, UserRegisterDto, VerifyOtpDto
 from logic.user_logic import UserLogic
+from logic.vcf_logic import VcfLogic
 
 app_router = APIRouter()
 
@@ -40,4 +41,4 @@ def verify_otp(otp_data: VerifyOtpDto, db: Session = Depends(get_db)):
 @app_router.post("/upload-vcf", summary="Subir archivo VCF", tags=["Genome"])
 async def upload_vcf(file: UploadFile = File(...)):
     """Endpoint para subir archivo VCF."""
-    return await UserLogic.upload_vcf(file)
+    return await VcfLogic.upload_vcf(file)
