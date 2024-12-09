@@ -50,7 +50,7 @@ def obtener_genomas_por_coincidencia(coincidencia: str,
         return {
             "pagina_actual": pagina_actual,
             "items_por_pagina": items_por_pagina,
-            "resultados": resultados
+            "resultados": _map_genomes_to_json(resultados)
         }
 
     except sqlite3.Error as e:
@@ -59,3 +59,43 @@ def obtener_genomas_por_coincidencia(coincidencia: str,
     finally:
         if conn:
             conn.close()
+
+def _map_genomes_to_json(genomes: list[tuple]) -> list[object]:
+    """Mapear genomas a modelo de genoma."""
+    genomes_mapped = []
+    for genome in genomes:
+        genomes_mapped.append({
+            "chrom": genome[0],
+            "pos": genome[1],
+            "ref": genome[2],
+            "alt": genome[3],
+            "filter": genome[4],
+            "info": genome[5],
+            "format": genome[6],
+            "output_1": genome[7],
+            "output_2": genome[8],
+            "output_3": genome[9],
+            "output_4": genome[10],
+            "output_5": genome[11],
+            "output_6": genome[12],
+            "output_7": genome[13],
+            "output_8": genome[14],
+            "output_9": genome[15],
+            "output_10": genome[16],
+            "output_11": genome[17],
+            "output_12": genome[18],
+            "output_13": genome[19],
+            "output_14": genome[20],
+            "output_15": genome[21],
+            "output_16": genome[22],
+            "output_17": genome[23],
+            "output_18": genome[24],
+            "output_19": genome[25],
+            "output_20": genome[26],
+            "output_21": genome[27],
+            "output_22": genome[28],
+            "output_23": genome[29],
+            "output_24": genome[30],
+            "output_25": genome[31],
+        })
+    return genomes_mapped
