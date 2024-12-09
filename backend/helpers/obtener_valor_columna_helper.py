@@ -21,8 +21,6 @@ class ObtenerValorColumnaHelper:
     def __init__(self, encabezado: str):
         self.encabezado = encabezado
         self._partir_encabezado_en_columnas()
-        for columna in self.columnas_del_encabezado:
-            print(columna)
         self._definir_todas_las_columnas()
 
     def _partir_encabezado_en_columnas(self):
@@ -89,6 +87,6 @@ class ObtenerValorColumnaHelper:
         Obtiene el valor de una columna por su nombre.
         """
         indice = self.obtener_indice_de_columna_por_nombre(nombre)
-        if indice is None:
+        if indice is None or indice == -1:
             return ""
         return fila[indice]
