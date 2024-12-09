@@ -1,15 +1,13 @@
 """Main routing."""
 
 from pathlib import Path
-import shutil
 from fastapi import APIRouter, Depends, File, UploadFile
-from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from database import get_db
 from dtos.user_dto import UserLoginDto, UserRegisterDto, VerifyOtpDto
 from logic.user_logic import UserLogic
 from logic.vcf_logic import VcfLogic
-from helpers.insert_data_in_db_helper import procesar_archivo_vcf
+from logic.genome_logic import obtener_genomas_por_coincidencia
 
 app_router = APIRouter()
 
@@ -44,3 +42,8 @@ async def upload_vcf(file: UploadFile = File(...)):
     """Endpoint para subir archivo VCF."""
     await VcfLogic.upload_vcf_and_insert_data(file)
     return {"message": "Archivo VCF subido exitosamente"}
+
+@app_router.get("/genomes", summary="Obtener genomas por coincidencia", tags=["Genome"])
+def get_genomes_by_coincidence(coincidence: str):
+    """Obtener genomas por coincidencia."""
+    return obtener_genomas_por_coincidencia(coincidence)
