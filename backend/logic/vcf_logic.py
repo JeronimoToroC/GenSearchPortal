@@ -1,6 +1,5 @@
 """VCF file handling logic."""
 
-import asyncio
 from fastapi import UploadFile
 from helpers.upload_vcf_file_helper import upload_file_vcf
 from helpers.insert_data_in_db_helper import procesar_archivo_vcf
