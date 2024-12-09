@@ -44,6 +44,17 @@ async def upload_vcf(file: UploadFile = File(...)):
     return {"message": "Archivo VCF subido exitosamente"}
 
 @app_router.get("/genomes", summary="Obtener genomas por coincidencia", tags=["Genome"])
-def get_genomes_by_coincidence(coincidence: str):
-    """Obtener genomas por coincidencia."""
-    return obtener_genomas_por_coincidencia(coincidence)
+def get_genomes_by_coincidence(
+    coincidence: str,
+    items_per_page: int = 10,
+    page: int = 1
+):
+    """
+    Obtener genomas por coincidencia con paginación.
+    
+    Args:
+        coincidence (str): Texto a buscar
+        items_per_page (int): Número de items por página (default: 10)
+        page (int): Número de página actual (default: 1)
+    """
+    return obtener_genomas_por_coincidencia(coincidence, items_per_page, page)
