@@ -1,40 +1,15 @@
 """VCF file handling logic."""
 
-from pathlib import Path
-import shutil
-from fastapi import HTTPException, UploadFile
+from fastapi import UploadFile
+from helpers.upload_vcf_file_helper import upload_file_vcf
+from helpers.insert_data_in_db_helper import procesar_archivo_vcf
 
 class VcfLogic:
     """VCF file handling logic."""
 
     @staticmethod
-    async def upload_vcf(file: UploadFile):
+    async def upload_vcf_and_insert_data(file: UploadFile):
         """Procesar la subida de archivo VCF."""
-        try:
-            # Verificar extensión
-            if not file.filename.endswith('.vcf'):
-                raise HTTPException(
-                    status_code=400,
-                    detail="El archivo debe tener extensión .vcf"
-                )
-
-            # Ruta donde se guardará el archivo
-            DATA_DIR = Path("data")
-            DATA_DIR.mkdir(exist_ok=True)
-            file_path = DATA_DIR / file.filename
-
-            # Guardar archivo en chunks para manejar archivos grandes
-            with open(file_path, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
-
-            return {
-                "mensaje": "Archivo subido exitosamente",
-                "nombre_archivo": file.filename,
-                "ruta": str(file_path)
-            }
-
-        except Exception as e:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Error al subir archivo: {str(e)}"
-            ) 
+        # await upload_file_vcf(file)
+        # procesar_archivo_vcf(file.filename)
+        procesar_archivo_vcf("cabernetSauvignon.vcf")
