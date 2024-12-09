@@ -153,6 +153,10 @@ def procesar_archivo_vcf(archivo_vcf: str):
 
         print("Datos insertados exitosamente en la base de datos")
         conn.close()
+
+        # Borrar el archivo VCF después de procesarlo exitosamente
+        vcf_path.unlink()
+        print(f"Archivo {archivo_vcf} eliminado exitosamente")
         return True
 
     except Exception as e:
