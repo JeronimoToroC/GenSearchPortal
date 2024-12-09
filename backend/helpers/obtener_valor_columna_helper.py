@@ -21,6 +21,8 @@ class ObtenerValorColumnaHelper:
     def __init__(self, encabezado: str):
         self.encabezado = encabezado
         self._partir_encabezado_en_columnas()
+        for columna in self.columnas_del_encabezado:
+            print(columna)
         self._definir_todas_las_columnas()
 
     def _partir_encabezado_en_columnas(self):
@@ -52,7 +54,7 @@ class ObtenerValorColumnaHelper:
         Define las columnas de salida para el genoma.
         """
         columnas_outputs = []
-        for i in range(9, 33):
+        for i in range(1, 26):
             indice = self._obtener_indice_de_columna_por_numero_de_output(i)
             columnas_outputs.append(GenomeColumnModel(f"output_{i}", indice))
         return columnas_outputs

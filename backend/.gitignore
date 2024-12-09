@@ -38,6 +38,7 @@ htmlcov/
 
 # Base de datos SQLite
 *.db
+*.db-journal
 *.sqlite
 *.sqlite3
 
