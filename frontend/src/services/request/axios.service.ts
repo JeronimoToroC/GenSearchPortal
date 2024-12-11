@@ -7,7 +7,7 @@ export class AxiosService {
     constructor() {
         this.instance = axios.create({
             baseURL: environment.apiUrl,
-            timeout: 5000,
+            timeout: 8000,
         })
 
         this.instance.interceptors.response.use(
