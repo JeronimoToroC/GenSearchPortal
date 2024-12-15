@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, HostListener } from '@angular/core'
 
 type ButtonStyle = 'primary' | 'secondary' | 'gray' | 'primary-dark'
 
@@ -16,4 +16,21 @@ export class ButtonComponent {
     @Input() height: string = 'auto'
     @Input() width: string = 'auto'
     @Input() fontSize: string = '14px'
+
+    @HostListener('keydown.enter', ['$event'])
+    handleKeyDown(event: KeyboardEvent): void {
+        if (!this.disabled) {
+            this.onClick()
+            event.preventDefault()
+        }
+    }
+
+    @HostListener('keyup.enter', ['$event'])
+    handleKeyUp(event: KeyboardEvent): void {
+        event.preventDefault()
+    }
+
+    onClick(): void {
+        console.log('Button clicked')
+    }
 }

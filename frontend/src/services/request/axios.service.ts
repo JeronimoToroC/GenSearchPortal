@@ -40,4 +40,19 @@ export class AxiosService {
         const response = await this.instance.delete<T>(endpoint)
         return response.data
     }
+
+    async patch<T>(endpoint: string, body: any): Promise<T> {
+        const response = await this.instance.patch<T>(endpoint, body)
+        return response.data
+    }
+
+    async head<T>(endpoint: string, params?: any): Promise<T> {
+        const response = await this.instance.head<T>(endpoint, { params })
+        return response.data
+    }
+
+    async options<T>(endpoint: string, params?: any): Promise<T> {
+        const response = await this.instance.options<T>(endpoint, { params })
+        return response.data
+    }
 }

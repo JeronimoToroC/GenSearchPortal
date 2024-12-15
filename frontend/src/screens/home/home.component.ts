@@ -1,51 +1,64 @@
 import { ButtonComponent } from '@common-components/Button/button.component'
 import { CommonModule } from '@angular/common'
 import { GenModel } from '@models/gen.model'
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 import { LogoutButtonComponent } from '@common-components/LogoutButton/logout-button.component'
+import { GenomeService } from '@services/request/geome.service'
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [ButtonComponent, CommonModule, LogoutButtonComponent],
+    imports: [ButtonComponent, CommonModule, FormsModule, LogoutButtonComponent],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
     genes: GenModel[] = []
     currentPage = 1
     itemsPerPage = 6
+    isLastPage = false
+    searchInput = ''
+    noResults = false
 
-    constructor() {
-        this.genes = this.generateMockData()
+    constructor(private readonly genomeService: GenomeService) {}
+
+    ngOnInit(): void {
+        this.loadGenomes()
     }
 
-    private generateMockData(): GenModel[] {
-        return Array.from({ length: 20 }, (_, i) => ({
-            Chrom: `Chr${i + 1}`,
-            Pos: `${1000 + i * 100}`,
-            Id: `RS${10000 + i}`,
-            Ref: ['A', 'T', 'C', 'G'][Math.floor(Math.random() * 4)],
-            Alt: ['A', 'T', 'C', 'G'][Math.floor(Math.random() * 4)],
-            Qual: (Math.random() * 100).toFixed(2),
-            Filter: ['PASS', 'LOW_QUAL'][Math.floor(Math.random() * 2)],
-            Info: `Sample info ${i + 1}`,
-            Format: 'GT:AD:DP:GQ:PL',
-            Output1: `1/1:0,30:30:90:1350,90,0`,
-            Output2: `0/1:15,15:30:90:500,0,500`,
-        }))
-    }
-
-    get totalPages(): number {
-        return Math.ceil(this.genes.length / this.itemsPerPage)
+    async loadGenomes(): Promise<void> {
+        try {
+            const response = await this.genomeService.searchGenomes(
+                this.searchInput,
+                this.currentPage,
+                this.itemsPerPage
+            )
+            this.genes = response.resultados
+            this.noResults = response.resultados.length === 0
+            this.isLastPage = response.resultados.length < this.itemsPerPage
+        } catch (error) {
+            console.error('Error loading genomes:', error)
+            this.noResults = true
+            this.genes = []
+        }
     }
 
     get paginatedGenes(): GenModel[] {
-        const startIndex = (this.currentPage - 1) * this.itemsPerPage
-        return this.genes.slice(startIndex, startIndex + this.itemsPerPage)
+        return this.genes
+    }
+
+    onSearch(): void {
+        this.currentPage = 1
+        this.isLastPage = false
+        this.noResults = false
+        this.loadGenomes()
     }
 
     onPageChange(page: number): void {
-        this.currentPage = page
+        if (page > 0 && !this.isLastPage) {
+            this.currentPage = page
+            this.loadGenomes()
+        }
     }
 }

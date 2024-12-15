@@ -6,18 +6,22 @@
 
     <!-- Input search -->
     <section class="home__search">
-        <input type="text" class="home__search-input" placeholder="Ej: BRCA1" />
+        <input type="text" class="home__search-input" placeholder="Ej: BRCA1" [(ngModel)]="searchInput" />
         <app-button
             [title]="'Buscar'"
             [height]="'53px'"
             [width]="'100px'"
             [style]="'primary'"
             [fontSize]="'16px'"
+            (click)="onSearch()"
         ></app-button>
     </section>
 
+    <!-- No results alert -->
+    <div *ngIf="noResults" class="alert alert-warning">No se encontraron resultados para la búsqueda.</div>
+
     <!-- Results -->
-    <section class="home__results">
+    <section class="home__results" *ngIf="!noResults">
         <table class="genes-table">
             <thead>
                 <tr>
@@ -48,6 +52,9 @@
                     <td>{{ gen.Output1 }}</td>
                     <td>{{ gen.Output2 }}</td>
                 </tr>
+                <tr *ngIf="genes.length === 0">
+                    <td colspan="11" class="no-data">No hay datos disponibles.</td>
+                </tr>
             </tbody>
         </table>
 
@@ -62,12 +69,12 @@
                 [width]="'100px'"
             ></app-button>
 
-            <span class="pagination__info"> Página {{ currentPage }} de {{ totalPages }} </span>
+            <span class="pagination__info"> Página {{ currentPage }} </span>
 
             <app-button
                 [title]="'Siguiente'"
                 [style]="'gray'"
-                [disabled]="currentPage === totalPages"
+                [disabled]="isLastPage"
                 (click)="onPageChange(currentPage + 1)"
                 [height]="'40px'"
                 [width]="'100px'"

@@ -26,4 +26,16 @@ export class RequestService {
     delete<T>(endpoint: string): Promise<T> {
         return this.axiosService.delete(endpoint)
     }
+
+    patch<T>(endpoint: string, body: any): Promise<T> {
+        return this.axiosService.patch(endpoint, body)
+    }
+
+    head<T>(endpoint: string, params?: any): Promise<T> {
+        return this.axiosService.head(endpoint, params)
+    }
+
+    options<T>(endpoint: string, params?: any): Promise<T> {
+        return this.axiosService.options(endpoint, params)
+    }
 }
