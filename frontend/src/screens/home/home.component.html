@@ -1,31 +1,45 @@
 <main class="home">
     <div class="home__header">
-        <h1 class="title1 home__title">Búsqueda de genes</h1>
+        <h1 class="title1 home__title">🍷 Búsqueda de genes 🧬</h1>
         <app-logout-button />
     </div>
 
     <!-- Input search -->
     <section class="home__search">
-        <input type="text" class="home__search-input" placeholder="Ej: BRCA1" [(ngModel)]="searchInput" />
+        <input
+            type="text"
+            class="home__search-input"
+            placeholder="Ej: BRCA1"
+            [(ngModel)]="searchInput"
+            [disabled]="isLoading"
+        />
         <app-button
             [title]="'Buscar'"
             [height]="'53px'"
             [width]="'100px'"
             [style]="'primary'"
             [fontSize]="'16px'"
+            [disabled]="isLoading"
             (click)="onSearch()"
         ></app-button>
     </section>
 
     <!-- No results alert -->
-    <div *ngIf="noResults" class="alert alert-warning">No se encontraron resultados para la búsqueda.</div>
+    <div *ngIf="noResults && !isLoading" class="alert alert-warning">
+        No se encontraron resultados para la búsqueda.
+    </div>
+
+    <!-- Loading spinner -->
+    <div *ngIf="isLoading" class="loading-view">
+        <div class="spinner"></div>
+        <p>Cargando resultados...</p>
+    </div>
 
     <!-- Results -->
-    <section class="home__results" *ngIf="!noResults">
+    <section class="home__results" *ngIf="!noResults && !isLoading">
         <table class="genes-table">
             <thead>
                 <tr>
-                    <th>Cromosoma</th>
                     <th>Posición</th>
                     <th>ID</th>
                     <th>Ref</th>
@@ -34,13 +48,11 @@
                     <th>Filtro</th>
                     <th>Info</th>
                     <th>Formato</th>
-                    <th>Salida 1</th>
-                    <th>Salida 2</th>
+                    <th *ngFor="let output of outputs">{{ output }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let gen of paginatedGenes">
-                    <td>{{ gen.Chrom }}</td>
                     <td>{{ gen.Pos }}</td>
                     <td>{{ gen.Id }}</td>
                     <td>{{ gen.Ref }}</td>
@@ -49,36 +61,32 @@
                     <td>{{ gen.Filter }}</td>
                     <td>{{ gen.Info }}</td>
                     <td>{{ gen.Format }}</td>
-                    <td>{{ gen.Output1 }}</td>
-                    <td>{{ gen.Output2 }}</td>
-                </tr>
-                <tr *ngIf="genes.length === 0">
-                    <td colspan="11" class="no-data">No hay datos disponibles.</td>
+                    <td *ngFor="let outputValue of getOutputValues(gen)">{{ outputValue }}</td>
                 </tr>
             </tbody>
         </table>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <app-button
-                [title]="'Anterior'"
-                [style]="'gray'"
-                [disabled]="currentPage === 1"
-                (click)="onPageChange(currentPage - 1)"
-                [height]="'40px'"
-                [width]="'100px'"
-            ></app-button>
-
-            <span class="pagination__info"> Página {{ currentPage }} </span>
-
-            <app-button
-                [title]="'Siguiente'"
-                [style]="'gray'"
-                [disabled]="isLastPage"
-                (click)="onPageChange(currentPage + 1)"
-                [height]="'40px'"
-                [width]="'100px'"
-            ></app-button>
-        </div>
     </section>
+
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="!noResults && !isLoading">
+        <app-button
+            [title]="'Anterior'"
+            [style]="'gray'"
+            [disabled]="currentPage === 1 || isLoading"
+            (click)="onPageChange(currentPage - 1)"
+            [height]="'40px'"
+            [width]="'100px'"
+        ></app-button>
+
+        <span class="pagination__info"> Página {{ currentPage }} </span>
+
+        <app-button
+            [title]="'Siguiente'"
+            [style]="'gray'"
+            [disabled]="isLastPage || isLoading"
+            (click)="onPageChange(currentPage + 1)"
+            [height]="'40px'"
+            [width]="'100px'"
+        ></app-button>
+    </div>
 </main>
